@@ -8,6 +8,8 @@ import { SendSignRequest } from "../../lib/api";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import AuthContext from "../../store/auth-context";
 
+import config from "../../config";
+
 const AuthForm = () => {
   const { sendRequest, error, status, data } = useHttp(SendSignRequest);
 
@@ -37,11 +39,9 @@ const AuthForm = () => {
     };
 
     if (isLogin) {
-      requestConfig.url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD8uMUlSxkZ6BRXFzd7Hm-eNWPEE1Bkydo";
+      requestConfig.url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${config.API_KEY}`;
     } else {
-      requestConfig.url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD8uMUlSxkZ6BRXFzd7Hm-eNWPEE1Bkydo";
+      requestConfig.url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${config.API_KEY}`;
     }
 
     sendRequest(requestConfig);
